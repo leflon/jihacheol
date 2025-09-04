@@ -36,7 +36,6 @@ const SVG_ID_TABLE: Record<string, string> = {
 	'1-GA': 'gtx-a'
 };
 
-db.exec('CREATE TABLE IF NOT EXISTS Lines(id TEXT PRIMARY KEY, name TEXT)');
 db.exec(
 	'CREATE TABLE IF NOT EXISTS Stops(id TEXT PRIMARY KEY, name TEXT, plain_name TEXT, lines TEXT)'
 );
