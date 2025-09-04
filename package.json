@@ -36,6 +36,7 @@
 		"@types/better-sqlite3": "^7.6.13",
 		"add": "^2.0.6",
 		"better-sqlite3": "^12.2.0",
+		"cheerio": "^1.1.2",
 		"leaflet": "^1.9.4",
 		"sqlite": "^5.1.1",
 		"svelte-confetti": "2.3.1"
