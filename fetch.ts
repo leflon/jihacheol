@@ -64,12 +64,13 @@ stops.each(function () {
 
 // SVG MAP SAVE;
 
-const mapStr = $('svg').toString();
+const svg = $('svg').first();
 
-const map = cheerio.load(mapStr, { xml: true });
-map('text').remove();
-map('path, rect, g, line, circle').each(function () {
-	if (map(this).attr('id')?.startsWith('A')) return map(this).remove();
-	map(this).attr('style', 'opacity: 1');
+svg.find('text').remove();
+svg.find('path, rect, g, line, circle').each(function () {
+	// Remove accessibility red indicators
+	if ($(this).attr('id')?.startsWith('A')) return void $(this).remove();
+	$(this).attr('style', 'opacity: 1');
 });
-writeFileSync('src/assets/map.svg', `<svg>${map('svg').toString()}</svg>`);
+
+writeFileSync('src/assets/map.svg', svg.toString());
