@@ -54,13 +54,7 @@
 </script>
 
 <div class="stop-input">
-	<input
-		type="text"
-		bind:value={query}
-		oninput={handleInput}
-		placeholder="La Motte-Picquet - Grenelle"
-		{disabled}
-	/>
+	<input type="text" bind:value={query} oninput={handleInput} placeholder="가천대" {disabled} />
 	{#if isDropdownVisible}
 		<div class="dropdown">
 			{#each completions as completion, index (completion.id)}

@@ -3,14 +3,8 @@ import type { Completion } from '$lib/models/completion.model';
 import { storage } from '$lib/storage';
 import { get } from 'svelte/store';
 
-export async function getRandomStation(enabledTypes: Record<string, boolean>): Promise<string> {
-	const query = new URLSearchParams();
-	const typeString = Object.entries(enabledTypes).reduce(
-		(acc, [index, val]) => acc + (val ? index + ',' : ''),
-		''
-	);
-	query.set('types', typeString);
-	const res = await fetch(`/api/random-station?${query.toString()}`);
+export async function getRandomStation(): Promise<string> {
+	const res = await fetch(`/api/random-station`);
 	return (await res.json()).id;
 }
 
@@ -22,13 +16,6 @@ export async function sendGuess(guess: string, correct: string): Promise<Guess> 
 export async function getCompletions(input: string): Promise<Completion[]> {
 	const result = await fetch(`/api/completions?input=${input}`);
 	return (await result.json()).completions;
-}
-
-export async function getMinimapFeatures(
-	stop: string
-): Promise<{ center: [number, number]; features: any; isConnecting: boolean }> {
-	const result = await fetch(`/api/minimap?stop=${stop}`);
-	return await result.json();
 }
 
 export async function sendGame(
@@ -45,7 +32,6 @@ export async function sendGame(
 		body: JSON.stringify({
 			guesses,
 			hardMode: snapshot.hardMode,
-			showMap: snapshot.showMap,
 			toGuess: correct,
 			userAction: action
 		})

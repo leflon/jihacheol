@@ -72,4 +72,4 @@ svg.find('path, rect, g, line, circle').each(function () {
 	$(this).attr('style', 'opacity: 1');
 });
 
-writeFileSync('src/assets/map.svg', svg.toString());
+writeFileSync('src/assets/map.svelte', svg.toString());

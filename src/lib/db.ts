@@ -2,21 +2,17 @@ import Database from 'better-sqlite3';
 import { plainify } from './utils';
 import type { Completion } from './models/completion.model';
 import type { Stop } from '$lib/models/stop.model';
-import type { Line } from '$lib/models/line.model';
 
-export const db = new Database('data/idfm.db');
+export const db = new Database('data/jihacheol.db');
 db.exec('PRAGMA journal_mode = WAL');
 
-export function getRandomStop(modes: string[]): { id: string } {
+export function getRandomStop(): { id: string } {
 	const query = db.prepare(
-		`SELECT s.id FROM Stops s
-		  JOIN StopModes
-		  m ON s.id = m.stop_id
-			WHERE m.mode in (${modes.map(() => '?').join(',')})
+		`SELECT id FROM Stops
 			ORDER BY RANDOM()
 			LIMIT 1`
 	);
-	const res = query.get(...modes);
+	const res = query.get();
 	return res as { id: string };
 }
 
@@ -30,22 +26,10 @@ export function getCompletions(input: string): Completion[] {
 }
 
 const fullStopQuery = db.prepare('SELECT * FROM Stops WHERE id = ?');
-const linesQuery = db.prepare('SELECT * FROM Lines WHERE name = ?');
-
-export function getStopData(id: string): { stop: Stop; lines: Line[] } | null {
+export function getStopData(id: string): { stop: Stop } | null {
 	const stop: Stop = fullStopQuery.get(id) as Stop;
-	if (!stop) {
-		return null;
-	}
-	stop.lines = (stop.lines as any as string).split(',');
+	if (!stop) return null;
 
-	const lines: Line[] = [];
-	for (const lineName of stop.lines) {
-		const line = linesQuery.get(lineName) as Line;
-		lines.push(line);
-	}
-	return {
-		stop,
-		lines
-	};
+	stop.lines = (stop.lines as any as string).split(',');
+	return { stop };
 }

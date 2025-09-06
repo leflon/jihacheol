@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Guess } from '$lib/models/guess.model';
 	import { storage } from '$lib/storage';
+	import { LINE_NAMES_BY_ID } from '$lib/utils';
 	import { blur } from 'svelte/transition';
 
 	type Props = {
@@ -11,7 +12,7 @@
 
 <div class="guess-row" transition:blur={{ duration: 200 }} data-hard={!$storage.hardMode}>
 	<div class="guess-row-cell name" data-correct={guess ? guess.name.correct : 'neutral'}>
-		{guess ? guess.name.value : 'Nom'}
+		{guess ? guess.name.value : '이름'}
 	</div>
 	<div
 		class="guess-row-cell lines"
@@ -19,37 +20,28 @@
 		data-correct={guess ? guess.lines.correct : 'neutral'}
 	>
 		{#if guess}
-			{#each guess.lines.value as line (line.name)}
-				<img src={line.picto} alt={line.name} width={28} />
+			{#each guess.lines.value as line (line)}
+				<img src={`/images/lines/${line}.png`} alt={LINE_NAMES_BY_ID[line]} width={28} />
 			{/each}
 		{:else}
-			Lignes
+			호선
 		{/if}
-	</div>
-	<div class="guess-row-cell" data-correct={guess ? guess.town.correct : 'neutral'}>
-		{guess ? guess.town.value : 'Ville'}
-	</div>
-	<div class="guess-row-cell" data-correct={guess ? guess.zone.correct : 'neutral'}>
-		{guess ? guess.zone.value : 'Zone'}
 	</div>
 	<div
 		class="guess-row-cell distance"
-		data-correct={guess ? guess.distance.correct : 'neutral'}
+		data-correct={guess ? guess.direction.correct : 'neutral'}
 		data-displayed={!$storage.hardMode}
 	>
 		{#if guess}
-			{#if guess.distance.correct !== 'correct'}
-				<img
-					class="guess-angle"
-					style:transform={`rotate(${guess.distance.value.angle}deg)`}
-					src="/images/1x/arrow.webp"
-					srcset="/images/1x/arrow.webp 1x, /images/2x/arrow.webp 2x,/images/3x/arrow.webp 3x"
-					alt="^"
-				/>
-			{/if}
-			<div class="guess-distance">{guess.distance.value.distance.toFixed(0)}m</div>
+			<img
+				class="guess-angle"
+				style:transform={`rotate(${guess.direction.value}deg)`}
+				src="/images/1x/arrow.webp"
+				srcset="/images/1x/arrow.webp 1x, /images/2x/arrow.webp 2x,/images/3x/arrow.webp 3x"
+				alt="^"
+			/>
 		{:else}
-			Distance
+			방향
 		{/if}
 	</div>
 </div>
@@ -57,14 +49,14 @@
 <style>
 	.guess-row {
 		display: grid;
-		grid-template-columns: repeat(6, minmax(50px, 1fr));
+		grid-template-columns: repeat(4, minmax(50px, 1fr));
 		align-items: center;
 		width: 800px;
 		gap: 30px;
 		min-height: 40px;
 		margin: 10px auto;
 		&[data-hard='false'] {
-			grid-template-columns: repeat(5, minmax(50px, 1fr));
+			grid-template-columns: repeat(3, minmax(50px, 1fr));
 		}
 	}
 
@@ -80,11 +72,12 @@
 	}
 
 	.guess-row-cell.name {
-		grid-column-end: span 2;
+		grid-column-end: span 1;
 	}
 
 	.guess-row-cell.lines {
 		gap: 5px;
+		grid-column-end: span 2;
 		cursor: help;
 		flex-wrap: wrap;
 		overflow-x: auto;

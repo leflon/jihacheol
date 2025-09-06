@@ -58,14 +58,11 @@ export const GET: RequestHandler = async ({ url }) => {
 	 * If the guessed stop has some lines that are in the correct stop, it's partial
 	 * Else, it's incorrect
 	 */
-	const guessedLines = guessedStop.lines.map((line) => line.name);
-	const correctLines = correctStop.lines.map((line) => line.name);
+	const guessedLines = guessedStop.stop.lines;
+	const correctLines = correctStop.stop.lines;
 
-	const lines: GuessEntry<{ name: string; picto: string }[]> = {
-		value: guessedStop.lines.map((line) => ({
-			name: line.name,
-			picto: line.picto
-		})),
+	const lines: GuessEntry<string[]> = {
+		value: guessedStop.stop.lines,
 		correct:
 			guessedLines.length === correctLines.length &&
 			guessedLines.every((line) => correctLines.includes(line))
@@ -75,29 +72,20 @@ export const GET: RequestHandler = async ({ url }) => {
 					: 'incorrect'
 	};
 
-	const town: GuessEntry = {
-		value: guessedStop.stop.town,
-		correct: guessedStop.stop.town === correctStop.stop.town ? 'correct' : 'incorrect'
-	};
-
-	const zone: GuessEntry = {
-		value: guessedStop.stop.fare_zone,
-		correct: guessedStop.stop.fare_zone === correctStop.stop.fare_zone ? 'correct' : 'incorrect'
-	};
-
-	const guessGeo = guessedStop.stop.geo.split(',').map((p) => parseFloat(p)) as [number, number];
-	const correctGeo = correctStop.stop.geo.split(',').map((p) => parseFloat(p)) as [number, number];
-	const [d, angle] = distanceAndAngle(guessGeo, correctGeo);
+	console.log({
+		name,
+		lines,
+		direction: {
+			value: 360,
+			correct: guess === correct ? 'correct' : 'partial'
+		},
+		isCorrect: guess === correct
+	});
 	return json({
 		name,
 		lines,
-		town,
-		zone,
-		distance: {
-			value: {
-				distance: d,
-				angle
-			},
+		direction: {
+			value: 360,
 			correct: guess === correct ? 'correct' : 'partial'
 		},
 		isCorrect: guess === correct

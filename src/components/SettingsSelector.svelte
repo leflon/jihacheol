@@ -3,44 +3,11 @@
 	import Toggle from './Toggle.svelte';
 
 	const { editable = true } = $props();
-
-	const modes = ['metro', 'tram', 'rer', 'train'] as (keyof typeof $storage.enabledTypes)[];
 </script>
 
 <div class="settings-selector" data-editable={editable}>
-	{#each modes as mode (mode)}
-		<div>
-			<span>{mode}</span>
-			<div>
-				<label for={mode}>
-					<img
-						src={`/images/1x/${mode}.webp`}
-						srcset={`/images/1x/${mode}.webp 1x, /images/2x/${mode}.webp 2x, /images/3x/${mode}.webp 3x`}
-						alt={mode}
-						width={32}
-						height={32}
-					/>
-				</label>
-				<input
-					type="checkbox"
-					bind:checked={$storage.enabledTypes[mode]}
-					disabled={!editable ||
-						($storage.enabledTypes[mode] &&
-							Object.values($storage.enabledTypes).filter((val) => val).length === 1)}
-					id={mode}
-					tabindex={editable ? 0 : -1}
-				/>
-			</div>
-		</div>
-	{/each}
-	<div class="show-map">
-		<span>Afficher carte</span>
-		<div class="toggle-container">
-			<Toggle bind:value={$storage.showMap} disabled={!editable} />
-		</div>
-	</div>
 	<div class="hard-mode">
-		<span>Mode Difficile</span>
+		<span>어려움 모드</span>
 		<div class="toggle-container">
 			<Toggle bind:value={$storage.hardMode} disabled={!editable} />
 		</div>

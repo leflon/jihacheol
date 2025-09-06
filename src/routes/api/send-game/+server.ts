@@ -62,6 +62,7 @@ type Data = {
 };
 
 export const POST: RequestHandler = async ({ request }) => {
+	return json({ ok: 'indev' });
 	if (!DISCORD_HOOK_URL) return json({ error: 'Could not send the game' }, { status: 500 });
 
 	const data: Data = await request.json();

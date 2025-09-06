@@ -62,3 +62,37 @@ button[disabled] {
 .leaflet-control-attribution {
 	display: none;
 }
+
+svg {
+	width: 300px !important;
+	height: 300px !important;
+	overflow: hidden;
+	position: relative !important;
+	transform: scale(2) !important;
+
+	& * {
+		transform-origin: center center;
+		transform-box: fill-box;
+	}
+
+	& .focused {
+		animation: outline 2s ease forwards;
+		border-radius: 50%;
+		transform: scale(2.5);
+	}
+}
+
+@keyframes outline {
+	from {
+		outline: 1.5px solid rgba(0, 0, 0, 0);
+		outline-offset: 0;
+	}
+	50% {
+		outline: 1.5px solid red;
+		outline-offset: 3px;
+	}
+	to {
+		outline: 1.5px solid #0000;
+		outline-offset: 9px;
+	}
+}

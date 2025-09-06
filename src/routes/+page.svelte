@@ -28,7 +28,7 @@
 	let inputContainer: HTMLDivElement;
 
 	onMount(async () => {
-		toGuess = await getRandomStation($storage.enabledTypes);
+		toGuess = await getRandomStation();
 	});
 
 	$effect(() => {
@@ -51,7 +51,7 @@
 	const reset = async () => {
 		const oldToGuess = toGuess;
 		// No matter what, we reset the station to guess
-		toGuess = await getRandomStation($storage.enabledTypes);
+		toGuess = await getRandomStation();
 		hasForfeited = false;
 		correctGuess = null;
 		selectedStop = null;
@@ -108,9 +108,7 @@
 	height={100}
 />
 <SettingsSelector editable={canEditSettings} />
-{#if $storage.showMap}
-	<MiniMap stop={toGuess} unzoom={unzoomMap} />
-{/if}
+<MiniMap stop={toGuess} />
 
 <div class={'input-container ' + inputContainerClass} bind:this={inputContainer}>
 	<div class="input-container-blur"></div>

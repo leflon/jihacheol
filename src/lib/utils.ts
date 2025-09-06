@@ -1,4 +1,4 @@
-export const LINE_NAMES_BY_ID = {
+export const LINE_NAMES_BY_ID: Record<string, string> = {
 	'1': '1호선',
 	'2': '2호선',
 	'3': '3호선',
@@ -8,7 +8,6 @@ export const LINE_NAMES_BY_ID = {
 	'7': '7호선',
 	'8': '8호선',
 	'9': '9호선',
-	'10': '10호선',
 	incheon1: '인천1호선',
 	incheon2: '인천2호선',
 	suinbundang: '수인분당선',
