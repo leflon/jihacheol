@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import SVGMap from '../assets/map.svelte';
-	let svg: SVGElement;
+	import { storage } from '$lib/storage';
+
 	const { stop }: { stop: string | null } = $props();
 
+	let svg: SVGElement;
 	let currentFocus: HTMLElement;
 
 	onMount(() => {
@@ -32,11 +34,11 @@
 	});
 </script>
 
-<div class="minimap">
+<div class="minimap" class:hard={$storage.hardMode}>
 	<SVGMap></SVGMap>
 </div>
 
-<style>
+<style scoped>
 	.minimap {
 		width: 300px;
 		max-width: 95%;
@@ -46,4 +48,5 @@
 		margin: 10px auto;
 		border-radius: 10px;
 	}
+	/* Additional styles in main.css */
 </style>

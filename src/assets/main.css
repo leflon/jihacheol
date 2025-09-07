@@ -63,6 +63,8 @@ button[disabled] {
 	display: none;
 }
 
+/* Because of how Svelte forces SVG import as a component,
+   we can only style the svg through global styles */
 svg {
 	width: 300px !important;
 	height: 300px !important;
@@ -93,6 +95,29 @@ svg {
 	}
 }
 
+.minimap.hard svg {
+	& > * {
+		stroke: black !important;
+	}
+	& circle {
+		/* All single line stops */
+		stroke: black !important;
+	}
+	& g.marker circle {
+		/* Connecting stop */
+		stroke: black !important;
+		fill: black !important;
+	}
+	& rect {
+		/* Line name rectangles */
+		fill: black;
+		stroke: black;
+	}
+	& g.marker rect {
+		/* Connection stop frame */
+		fill: white;
+	}
+}
 @keyframes outline {
 	from {
 		outline: 1.5px solid rgba(0, 0, 0, 0);
