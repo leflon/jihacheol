@@ -76,9 +76,20 @@ svg {
 	}
 
 	& .focused {
-		animation: outline 2s ease forwards;
+		--scale: 2.5;
+		&:is(g) {
+			/* Matches rectangles (connecting stops) which look too big on 2.5 */
+			--scale: 1.5;
+		}
+		animation: outline 1.5s ease;
 		border-radius: 50%;
-		transform: scale(2.5);
+		transform: scale(var(--scale));
+		transition: transform 0.2s ease;
+		cursor: pointer;
+
+		&:hover {
+			transform: scale(calc(var(--scale) * 1.5));
+		}
 	}
 }
 
@@ -87,7 +98,8 @@ svg {
 		outline: 1.5px solid rgba(0, 0, 0, 0);
 		outline-offset: 0;
 	}
-	50% {
+	40%,
+	65% {
 		outline: 1.5px solid red;
 		outline-offset: 3px;
 	}

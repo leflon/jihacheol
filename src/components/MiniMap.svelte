@@ -15,6 +15,13 @@
 		if (currentFocus) currentFocus.classList.remove('focused'); // reset previous focus
 		const num = stop.slice(1);
 		currentFocus = svg.querySelector(`#M${num}`)! as HTMLElement;
+
+		/* Ensure the circle/rectangle is on top of all others,
+		which ensures a better animation (outline doesn't appear under other shapes) */
+		const parent = currentFocus.parentElement!;
+		currentFocus.remove();
+		parent.insertAdjacentElement('beforeend', currentFocus);
+
 		currentFocus.classList.add('focused');
 		// 150 as half 300px being the width of the svg,
 		// 2 to account for the scale(2) applied to the map.
@@ -22,7 +29,6 @@
 		const x = parseInt(currentFocus.getAttribute('cx')!) - OFFSET;
 		const y = parseInt(currentFocus.getAttribute('cy')!) - OFFSET;
 		svg.setAttribute('viewBox', `${x} ${y} 300 300`);
-		console.log(x, y);
 	});
 </script>
 
