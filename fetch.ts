@@ -37,7 +37,7 @@ const SVG_ID_TABLE: Record<string, string> = {
 };
 
 db.exec(
-	'CREATE TABLE IF NOT EXISTS Stops(id TEXT PRIMARY KEY, name TEXT, plain_name TEXT, lines TEXT)'
+	'CREATE TABLE IF NOT EXISTS Stops(id TEXT PRIMARY KEY, name TEXT, plain_name TEXT, lines TEXT, x NUMBER, y NUMBER)'
 );
 
 const cyberStationHTML = readFileSync('cyberStation.html', { encoding: 'utf-8' });
@@ -45,20 +45,24 @@ const $ = cheerio.load(cyberStationHTML);
 
 const stops = $('svg text');
 
-const addStop = db.prepare('INSERT OR IGNORE INTO Stops VALUES (?,?,?,?)');
+const addStop = db.prepare('INSERT OR IGNORE INTO Stops VALUES (?,?,?,?,?,?)');
 
 stops.each(function () {
 	const elm = $(this);
 	const id = elm.attr('id');
 	const linesRaw = elm.attr('lineid');
 	if (!id || !linesRaw) return;
+	// Circle/rect on map representing the stop
+	const indicator = $(`svg #M${id.slice(1)}`);
+	const x = parseInt(indicator.attr('cx') || elm.attr('cx')!);
+	const y = parseInt(indicator.attr('cy') || elm.attr('cy')!);
 	const lines = linesRaw.split(' ').map((l) => SVG_ID_TABLE[l]);
 	let name = '';
 	elm.children('tspan').each(function () {
 		name += $(this).text().trim();
 	});
 	const plainName = plainify(name);
-	addStop.run(id, name, plainName, lines.join(','));
+	addStop.run(id, name, plainName, lines.join(','), x, y);
 });
 
 // SVG MAP SAVE;
