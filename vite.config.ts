@@ -10,15 +10,14 @@ export default defineConfig({
 			name: 'git-commit-info',
 			config() {
 				const hash = execSync('git log -1 --pretty=format:"%h"').toString().trim();
-				const now = new Date().toLocaleString(undefined, {
+				const now = new Date().toLocaleString('ko', {
 					month: 'long',
 					day: '2-digit',
 					year: 'numeric',
 					hour12: false,
 					hour: '2-digit',
 					minute: '2-digit',
-					second: '2-digit',
-					weekday: 'long'
+					weekday: 'narrow'
 				});
 				process.env.VITE_GIT_COMMIT_HASH = hash;
 				process.env.VITE_BUILD_TIME = now;

@@ -85,15 +85,15 @@
 	<link
 		rel="preload"
 		as="font"
-		href="/fonts/Parisine.otf"
-		type="font/otf"
+		href="/fonts/SeoulNamsanEB.ttf"
+		type="font/ttf"
 		crossorigin="anonymous"
 	/>
 	<link
 		rel="preload"
 		as="font"
-		href="/fonts/Parisine Bold.otf"
-		type="font/otf"
+		href="/fonts/SeoulNamsanM.ttf"
+		type="font/ttf"
 		crossorigin="anonymous"
 	/>
 	<title>Metrodle</title>
@@ -113,8 +113,8 @@
 <div class={'input-container ' + inputContainerClass} bind:this={inputContainer}>
 	<div class="input-container-blur"></div>
 	<StopInput bind:selected={selectedStop} disabled={hasWon || hasForfeited} />
-	<button tabindex={0} onclick={handleGuess}>Valider</button>
-	<button onclick={reset}>Recommencer</button>
+	<button tabindex={0} onclick={handleGuess}>보내기</button>
+	<button onclick={reset}>다시 하기</button>
 </div>
 <div class="guess-container">
 	<GuessRow />
@@ -123,13 +123,13 @@
 	{/each}
 	{#if guesses.length === 0}
 		<div out:fade={{ duration: 200 }} in:fade={{ delay: 500 }} class="start-hint">
-			Essayez de deviner la station !
+			무슨 역인지 맞춰보세요!
 		</div>
 	{/if}
 </div>
 {#if !hasWon && !hasForfeited}
 	<div class="button-container">
-		<button onclick={forfeit}>Réveler la réponse</button>
+		<button onclick={forfeit}>정답 보여주기</button>
 	</div>
 {/if}
 {#if hasForfeited && correctGuess}
@@ -166,7 +166,7 @@
 		/>
 	</div>
 	<div class="button-container" in:fade={{ delay: 200 }} out:fade={{ duration: 0 }}>
-		<button onclick={reset}>Rejouer</button>
+		<button onclick={reset}>다시 하기</button>
 	</div>
 {/if}
 <Footer></Footer>

@@ -1,18 +1,18 @@
 :root {
-	--primary-color: #02c4b4;
-	--secondary-color: #02a396;
+	--primary-color: #0052a4;
+	--secondary-color: #003da5;
 }
 
 @font-face {
 	font-family: 'Parisine';
-	src: url('/fonts/Parisine.otf') format('opentype');
+	src: url('/fonts/SeoulNamsanM.ttf');
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Parisine';
-	src: url('/fonts/Parisine Bold.otf') format('opentype');
+	src: url('/fonts/SeoulNamsanEB.ttf');
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
@@ -34,7 +34,7 @@ body {
 
 button {
 	background-color: var(--primary-color);
-	color: black;
+	color: white;
 	font-family: 'Parisine', serif;
 	border: none;
 	border-radius: 4px;

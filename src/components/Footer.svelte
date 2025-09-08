@@ -8,11 +8,10 @@
 </script>
 
 <footer>
-	<p>Made in 🇫🇷 by <a href="https://leflon.fr">Paul Leflon</a></p>
+	<p><a href="https://leflon.fr">Paul Leflon</a> 제작</p>
 	<hr />
-	<p>Map provided by <a href="https://carto.com">Carto</a></p>
-	<p>Built on {buildTime}</p>
-	<p>Version: {version} | Commit: <a href={commitHref}>{commit}</a></p>
+	<p>{buildTime} 빌드</p>
+	<p>버전: {version} | 커밋: <a href={commitHref}>{commit}</a></p>
 </footer>
 
 <style>

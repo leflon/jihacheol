@@ -16,7 +16,7 @@
 	</div>
 	<div
 		class="guess-row-cell lines"
-		title="Vert si toutes les lignes sont correctes, orange si certaines le sont, rouge si aucune n'est correcte"
+		title={'초록: 모든 호선 맞음 \n주황: 일부 호선 맞음 \n빨간: 맞는 호선이 없음'}
 		data-correct={guess ? guess.lines.correct : 'neutral'}
 	>
 		{#if guess}
@@ -101,8 +101,9 @@
 
 	.guess-row-cell[data-correct='neutral'] {
 		border-radius: 0;
-		background: #0e0f4f;
-		color: white;
+		background: white;
+		border: 8px solid var(--primary-color);
+		border-radius: 10em;
 		font-size: 16pt;
 		font-weight: bold;
 		overflow: hidden;
@@ -123,13 +124,18 @@
 		.guess-row-cell[data-correct='neutral'] {
 			font-size: 10pt;
 			justify-content: center;
+			border-radius: 0;
+			border: none;
 		}
 
 		.guess-row {
 			gap: 0;
-			width: 100%;
+			width: 95%;
 			box-sizing: border-box;
 			margin: 10px auto;
+			border-radius: 10em;
+			overflow: hidden;
+			border: 8px solid var(--primary-color);
 		}
 
 		.guess-row-cell.lines {
