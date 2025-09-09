@@ -36,6 +36,7 @@
 			<img
 				class="guess-angle"
 				style:transform={`rotate(${guess.direction.value}deg)`}
+				width={24}
 				src="/images/1x/arrow.webp"
 				srcset="/images/1x/arrow.webp 1x, /images/2x/arrow.webp 2x,/images/3x/arrow.webp 3x"
 				alt="^"

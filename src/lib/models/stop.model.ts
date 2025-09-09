@@ -4,4 +4,6 @@ export type Stop = {
 	/* Name without accents */
 	plain_name: string;
 	lines: string[];
+	x: number;
+	y: number;
 };
