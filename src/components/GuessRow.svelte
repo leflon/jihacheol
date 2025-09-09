@@ -24,7 +24,7 @@
 				<img src={`/images/lines/${line}.png`} alt={LINE_NAMES_BY_ID[line]} width={28} />
 			{/each}
 		{:else}
-			호선
+			노선
 		{/if}
 	</div>
 	<div
@@ -50,6 +50,7 @@
 <style>
 	.guess-row {
 		display: grid;
+		color: black;
 		grid-template-columns: repeat(4, minmax(50px, 1fr));
 		align-items: center;
 		width: 800px;
@@ -105,7 +106,8 @@
 		background: white;
 		border: 8px solid var(--primary-color);
 		border-radius: 10em;
-		font-size: 16pt;
+		font-size: 14pt;
+		padding: 10px 0;
 		font-weight: bold;
 		overflow: hidden;
 	}

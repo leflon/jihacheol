@@ -1,6 +1,6 @@
 :root {
-	--primary-color: #0052a4;
-	--secondary-color: #003da5;
+	--primary-color: #f08225;
+	--secondary-color: #e07116;
 }
 
 @font-face {
@@ -42,10 +42,16 @@ button {
 	font-size: 16px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+	&.secondary {
+		background: #808080;
+	}
 }
 
 button:hover {
 	background-color: var(--secondary-color);
+	&.secondary {
+		background-color: #707070;
+	}
 }
 
 button:active {

@@ -100,12 +100,10 @@
 </svelte:head>
 <img
 	class="main-logo"
-	src="/images/1x/full-logo.webp"
-	srcset="/images/1x/full-logo.webp 1x, /images/2x/full-logo.webp 2x, /images/3x/full-logo.webp 3x"
+	src="/images/full_logo.webp"
 	alt="Metrodle"
 	fetchpriority="high"
-	width={400}
-	height={100}
+	height={120}
 />
 <SettingsSelector editable={canEditSettings} />
 <MiniMap stop={toGuess} />
@@ -113,8 +111,8 @@
 <div class={'input-container ' + inputContainerClass} bind:this={inputContainer}>
 	<div class="input-container-blur"></div>
 	<StopInput bind:selected={selectedStop} disabled={hasWon || hasForfeited} />
-	<button tabindex={0} onclick={handleGuess}>보내기</button>
-	<button onclick={reset}>다시 하기</button>
+	<button tabindex={0} onclick={handleGuess}>입력</button>
+	<button class="secondary" onclick={reset}>다시 하기</button>
 </div>
 <div class="guess-container">
 	<GuessRow />
@@ -129,7 +127,7 @@
 </div>
 {#if !hasWon && !hasForfeited}
 	<div class="button-container">
-		<button onclick={forfeit}>정답 보여주기</button>
+		<button onclick={forfeit} class="secondary">정답 보기</button>
 	</div>
 {/if}
 {#if hasForfeited && correctGuess}
@@ -174,10 +172,9 @@
 <style>
 	img {
 		display: block;
-		width: 400px;
 		max-width: 80%;
 		object-fit: contain;
-		margin: 20px auto;
+		margin: 10px auto 20px auto;
 	}
 
 	.start-hint {

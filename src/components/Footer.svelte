@@ -8,7 +8,10 @@
 </script>
 
 <footer>
-	<p><a href="https://leflon.fr">Paul Leflon</a> 제작</p>
+	<p>
+		<a href="https://leflon.fr">Paul Leflon</a> &
+		<a href="https://www.linkedin.com/in/youjin-jeong-57234130b/">정유진</a> 제작
+	</p>
 	<hr />
 	<p>{buildTime} 빌드</p>
 	<p>버전: {version} | 커밋: <a href={commitHref}>{commit}</a></p>

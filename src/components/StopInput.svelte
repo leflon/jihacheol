@@ -75,7 +75,7 @@
 <style>
 	.stop-input {
 		position: relative;
-		width: 400px;
+		width: 280px;
 		max-width: 100%;
 		display: flex;
 		z-index: 100;

@@ -7,7 +7,7 @@
 
 <div class="settings-selector" data-editable={editable}>
 	<div class="hard-mode">
-		<span>어려움 모드</span>
+		<span>하드 모드</span>
 		<div class="toggle-container">
 			<Toggle bind:value={$storage.hardMode} disabled={!editable} />
 		</div>
@@ -40,7 +40,7 @@
 
 	.settings-selector > div {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 		gap: 10px;
 

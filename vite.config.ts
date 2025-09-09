@@ -26,6 +26,7 @@ export default defineConfig({
 		}
 	],
 	server: {
+		allowedHosts: true,
 		headers: {
 			'Cache-Control': 'max-age=2592000' // 30 days
 		},
