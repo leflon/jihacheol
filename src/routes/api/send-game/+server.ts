@@ -42,8 +42,8 @@ function formatGuessEntry(name: keyof Guess, entry: GuessEntry<unknown>): string
 	let value: string;
 
 	if (name === 'lines') {
-		const typed = entry.value as { name: string; picto: string }[];
-		value = typed.map((v) => v.name).join(', ');
+		const typed = entry.value as string[];
+		value = typed.join(', ');
 	} else if (name === 'direction') {
 		const typed = entry.value as number;
 		value = `${getArrowEmojiFromAngle(typed)}`;
