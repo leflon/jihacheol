@@ -21,7 +21,7 @@
 	>
 		{#if guess}
 			{#each guess.lines.value as line (line)}
-				<img src={`/images/lines/${line}.png`} alt={LINE_NAMES_BY_ID[line]} width={28} />
+				<img src={`/images/lines/${line}.png?2`} alt={LINE_NAMES_BY_ID[line]} width={28} />
 			{/each}
 		{:else}
 			노선
