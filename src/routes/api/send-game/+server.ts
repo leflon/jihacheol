@@ -44,9 +44,9 @@ function formatGuessEntry(name: keyof Guess, entry: GuessEntry<unknown>): string
 	if (name === 'lines') {
 		const typed = entry.value as { name: string; picto: string }[];
 		value = typed.map((v) => v.name).join(', ');
-	} else if (name === 'distance') {
-		const typed = entry.value as { angle: number; distance: number };
-		value = `${getArrowEmojiFromAngle(typed.angle)} ${typed.distance.toFixed(0)}m`;
+	} else if (name === 'direction') {
+		const typed = entry.value as number;
+		value = `${getArrowEmojiFromAngle(typed)}`;
 	} else {
 		value = (entry.value as string | number).toString();
 	}
@@ -62,7 +62,6 @@ type Data = {
 };
 
 export const POST: RequestHandler = async ({ request }) => {
-	return json({ ok: 'indev' });
 	if (!DISCORD_HOOK_URL) return json({ error: 'Could not send the game' }, { status: 500 });
 
 	const data: Data = await request.json();
@@ -77,9 +76,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		guessString += `${g.isCorrect ? '🟩' : '🟥'} `;
 		guessString += formatGuessEntry('name', g.name);
 		guessString += ' | ' + formatGuessEntry('lines', g.lines);
-		guessString += ' | ' + formatGuessEntry('town', g.town);
-		guessString += ' | ' + formatGuessEntry('zone', g.zone);
-		guessString += ' | ' + formatGuessEntry('distance', g.distance);
+		guessString += ' | ' + formatGuessEntry('direction', g.direction);
 		guessString += '\n';
 	}
 
@@ -94,7 +91,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	body += `**Hard mode**: ${data.hardMode ? 'Yes' : 'No'}\n`;
 	body += `**Show map**: ${data.showMap ? 'Yes' : 'No'}\n\n`;
 	body += `${guessString}\n`;
-	body += `**Correct**: ${stopData.stop.name} (${stopData.lines.map((l) => l.name).join(', ')})`;
+	body += `**Correct**: ${stopData.stop.name} (${stopData.stop.lines.join(', ')})`;
 	const embed = {
 		title: 'New Game!',
 		description: body,
