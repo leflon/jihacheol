@@ -100,7 +100,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		description: body,
 		color: 0x4cc0ae,
 		footer: {
-			text: 'Metrodle'
+			text: '무슨역?'
 		},
 		timestamp: new Date().toISOString()
 	};

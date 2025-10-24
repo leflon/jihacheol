@@ -96,12 +96,12 @@
 		type="font/ttf"
 		crossorigin="anonymous"
 	/>
-	<title>Metrodle</title>
+	<title>무슨역?</title>
 </svelte:head>
 <img
 	class="main-logo"
 	src="/images/full_logo.webp"
-	alt="Metrodle"
+	alt="무슨역?"
 	fetchpriority="high"
 	height={120}
 />
